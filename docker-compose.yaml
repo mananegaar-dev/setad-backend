@@ -48,26 +48,6 @@ services:
 
 
 
-# --------------- web server -------------
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    depends_on:
-      localities:
-        condition: service_healthy
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      # - ./nginx/conf.d:/etc/nginx/mahalat.conf
-      - ./nginx/var/www/html:/usr/share/nginx/html:ro
-      - ./media:/media
-      # - certbot_conf:/etc/letsencrypt
-      # - certbot_www:/var/www/certbot
-    ports:
-      - "81:81"
-    restart: always
-    networks:
-      - backend
  
 
   # # ---------------- Background Tasks ----------------
@@ -102,10 +82,7 @@ services:
 
 volumes:
   m-back-end_postgres_data:
-  # static_volume:
-  # media_volume:
-  # certbot_conf:
-  # certbot_www:
+
 
 networks:
   backend:

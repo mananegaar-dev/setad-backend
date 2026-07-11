@@ -27,7 +27,7 @@ COPY r.txt .
 # ---------------------------
 # RUN pip install --upgrade pip
 # RUN pip install -r r.txt
-RUN pip install -r r.txt -i https://mirror-pypi.runflare.com/simple
+RUN pip install -r r.txt
 
 
 # ---------------------------

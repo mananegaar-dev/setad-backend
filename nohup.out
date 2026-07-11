@@ -1,6 +1,0 @@
-usage: manage.py verify_user [-h] [--version] [-v {0,1,2,3}]
-                             [--settings SETTINGS] [--pythonpath PYTHONPATH]
-                             [--traceback] [--no-color] [--force-color]
-                             [--skip-checks]
-manage.py verify_user: error: unrecognized arguments: command.log
-
