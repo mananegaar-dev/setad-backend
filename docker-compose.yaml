@@ -1,0 +1,113 @@
+services:
+  # ---------------- localities ----------------
+  localities:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: localities:localities-v1.0.0
+    volumes:
+      - .:/app # Delte this line If you are in production
+      - ./media:/app/media
+    container_name: localities
+    working_dir: /app
+    command: ["bash", "/app/scripts/localities.sh"]
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health/"]
+      interval: 60s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
+  
+
+    expose:
+      - "8001"
+    ports:
+      - "8001:8001"
+    networks:
+      - backend
+
+
+  # ---------------- PostgreSQL ----------------
+  db:
+    image: postgres:16
+    container_name: db
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - m-back-end_postgres_data:/var/lib/postgresql/data
+      - ./backup:/backup
+    restart: unless-stopped
+    networks:
+      - backend
+
+
+
+# --------------- web server -------------
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    depends_on:
+      localities:
+        condition: service_healthy
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      # - ./nginx/conf.d:/etc/nginx/mahalat.conf
+      - ./nginx/var/www/html:/usr/share/nginx/html:ro
+      - ./media:/media
+      # - certbot_conf:/etc/letsencrypt
+      # - certbot_www:/var/www/certbot
+    ports:
+      - "81:81"
+    restart: always
+    networks:
+      - backend
+ 
+
+  # # ---------------- Background Tasks ----------------
+
+  # celery:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   working_dir: /app/mana
+  #   command: celery -A mana worker -l info --concurrency=4
+  #   volumes:
+  #     - ./mana:/app/mana
+    
+  #   depends_on:
+  #     mana:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_healthy
+  #   networks:
+  #     - backend
+
+
+
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - certbot_conf:/etc/letsencrypt
+  #     - certbot_www:/var/www/certbot
+  #   command: certonly --webroot --webroot-path=/var/www/certbot \
+  #     -d api.setadmahalat.mananegaar.ir \
+  #     --email mananegaar@mananegaar.ir --agree-tos --no-eff-email
+
+volumes:
+  m-back-end_postgres_data:
+  # static_volume:
+  # media_volume:
+  # certbot_conf:
+  # certbot_www:
+
+networks:
+  backend:
+    driver: bridge
+
