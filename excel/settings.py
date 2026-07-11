@@ -35,7 +35,10 @@ ALLOWED_HOSTS = [
     ".mananegaar.ir",
     "mananegaar.ir",
     "localhost",
+    "127.0.0.1",
     "78.157.61.245",
+    "setadmahalle.ir",
+    ".setadmahalle.ir"
 ]
 
 
@@ -195,13 +198,17 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://78.157.61.245",
     "http://78.157.61.245:8001",
+    "http://setadmahalle.ir",
+    "http://.setadmahalle.ir/"
 ]
 USE_X_FORWARDED_HOST = True
 
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.setadmahalle\.ir$",
     r"^https://.*\.mananegaar\.ir$",
     r"^http://.*\.mananegaar\.ir$",
+    r"^http://.*\.setadmahalle\.ir$",
 ]
 
 # Internationalization
