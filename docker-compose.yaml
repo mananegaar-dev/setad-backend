@@ -4,7 +4,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: localities:localities-v1.0.0
     volumes:
       - .:/app # Delte this line If you are in production
       - ./media:/app/media
