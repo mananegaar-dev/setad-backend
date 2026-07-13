@@ -11,12 +11,12 @@ set +a
 
 
 # wating for db
-echo "Waiting for DB ..."
-until pg_isready -h db -p ${DB_PORT} -U ${DB_USER}; do
-    echo "Waiting for DB..."
-    sleep 3
-done
-echo "Database is UP"
+# echo "Waiting for DB ..."
+# until pg_isready -h db -p ${DB_PORT} -U ${DB_USER}; do
+#     echo "Waiting for DB..."
+#     sleep 3
+# done
+# echo "Database is UP"
 
 
 # migrations ...

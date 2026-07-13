@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/app # Delte this line If you are in production
+      - .:/app
       - ./media:/app/media
     container_name: localities
     working_dir: /app
