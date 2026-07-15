@@ -1,6 +1,6 @@
 
 from django.urls import path
-from auth_app.api.v1 import CurrentUserView, UserLoginView,CookieTokenRefreshView,LogoutView, IsLogin
+from auth_app.api.v1 import CurrentUserView, UserLoginView, CookieTokenRefreshView, LogoutView, IsLogin, OtpVerifyView
 
 
 urlpatterns = [
