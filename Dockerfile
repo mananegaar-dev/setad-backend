@@ -7,10 +7,14 @@ WORKDIR /app
 # ---------------------------
 # Install system dependencies
 # ---------------------------
-RUN apt-get update && apt-get install -y \
+RUN sed -i 's|http://deb.debian.org|https://mirrors.tuna.tsinghua.edu.cn|g' \
+    /etc/apt/sources.list.d/debian.sources && \
+    apt-get update && apt-get install -y \
     postgresql-client \
     build-essential \
     libpq-dev \
+    redis-tools \
+    gettext \
     gcc \
     curl \
     bash \
