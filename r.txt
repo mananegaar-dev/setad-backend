@@ -1,5 +1,5 @@
-asgiref==3.11.1
-asttokens==3.0.2
+asgiref
+asttokens
 attrs==25.4.0
 charset-normalizer==3.4.4
 click==8.3.1
