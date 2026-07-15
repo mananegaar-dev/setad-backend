@@ -199,7 +199,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://78.157.61.245",
     "http://78.157.61.245:8001",
     "http://setadmahalle.ir",
-    "http://.setadmahalle.ir/"
+    "http://.setadmahalle.ir"
 ]
 USE_X_FORWARDED_HOST = True
 
